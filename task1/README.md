@@ -1,24 +1,21 @@
-# task1
+# VueResume - Задание №1
 
-## Project setup
+## Для развертывания проекта выполните следующую команду:
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Для запуска проекта в режиме разработки запустите следующее:
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Для выпуска в релиз запустите следующее:
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Для исправления ошибок в файлах запустите следующее:
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
