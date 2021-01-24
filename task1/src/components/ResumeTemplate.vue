@@ -3,6 +3,7 @@
     <h2 class="text-center form-col-title">Сформированное резюме</h2>
     <div>
       <div class="d-flex justify-content-center">
+        <!-- Если фотография не загружается, то отображаем стандартную фотографию для резюме -->
         <img :src="resume.photoUrl" class="resume-image rounded-circle mb-2" alt="Image not found" onerror="this.src='person.jpg';">
       </div>
       <div class="row">
@@ -62,6 +63,7 @@
 <script>
 export default {
   name: "ResumeTemplate",
+  // переданный объект резюме
   props:['resume'],
   data () {
     return {

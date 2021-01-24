@@ -78,13 +78,16 @@
 <script>
 export default {
   name: "ResumeForm",
+  // переданный объект резюме
   props:['resume'],
   data () {
     return {
+      // получаем текущую дату в формате dd.mm.yyyy
       birthdayPlaceholder: new Date(Date.now()).toLocaleString().slice(0, 10)
     }
   },
   methods: {
+    // метод очистки полей формы резюме
     clearResumeForm() {
       this.resume.profession = ''
       this.resume.city = ''

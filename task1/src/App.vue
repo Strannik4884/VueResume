@@ -20,6 +20,7 @@ import ResumeTemplate from './components/ResumeTemplate.vue'
 export default {
   data() {
     return {
+      // объект Resume с необходимыми полями
       resume: {
         profession: '',
         city: '',
@@ -36,7 +37,9 @@ export default {
     }
   },
   components: {
+    // компонент формы резюме
     'resumeForm': ResumeForm,
+    // компонент шаблона резюме
     'resumeTemplate': ResumeTemplate
   }
 }
