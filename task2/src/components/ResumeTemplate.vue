@@ -79,6 +79,7 @@
           <div class="text-wrap mb-2" style="width: 100%">О себе: {{ resumeView.about }}</div>
         </div>
       </div>
+      <button type="button" class="btn btn-danger" @click="clearResumeTemplate">Очистить резюме</button>
     </div>
   </div>
 </template>
@@ -90,6 +91,25 @@ export default {
   props: ['resume', 'resumeView', 'educationLevels'],
   data() {
     return {}
+  },
+  methods: {
+    clearResumeTemplate() {
+      this.resumeView.profession = ''
+      this.resumeView.city = ''
+      this.resumeView.photoUrl = ''
+      this.resumeView.name = ''
+      this.resumeView.phone = ''
+      this.resumeView.email = ''
+      this.resumeView.birthday = ''
+      this.resumeView.educationLevel = ''
+      this.resumeView.educationPlace = ''
+      this.resumeView.educationFaculty = ''
+      this.resumeView.educationSpecialization = ''
+      this.resumeView.educationEndDate = ''
+      this.resumeView.desiredSalary = ''
+      this.resumeView.skills = ''
+      this.resumeView.about = ''
+    }
   }
 }
 </script>
