@@ -42,7 +42,7 @@
           <div class="text-wrap mb-2" style="width: 100%">Образование: {{ resumeView.educationLevel }}</div>
         </div>
       </div>
-      <div v-if="resume.educationLevel !== 'Среднее' && resume.educationLevel !== ''">
+      <div v-if="resume.educationLevel !== educationLevels[0] && resume.educationLevel !== ''">
         <div class="row">
           <div class="col">
             <div class="text-wrap mb-2" style="width: 100%">Учебное заведение: {{ resumeView.educationPlace }}</div>

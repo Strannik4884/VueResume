@@ -1,17 +1,17 @@
 <template>
   <div>
     <h2 class="text-center form-col-title">Форма резюме</h2>
-    <form ref="form" @reset.prevent="clearResumeForm" v-if="showResumeForm">
+    <form ref="form" @submit.prevent="applyResumeForm" @reset.prevent="clearResumeForm" v-if="showResumeForm">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Профессия:</label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" placeholder="Программист" required v-model="resume.profession">
+          <input type="text" class="form-control" maxlength="100" placeholder="Программист" required v-model="resume.profession">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Город:</label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" placeholder="Липецк" required v-model="resume.city">
+          <input type="text" class="form-control" maxlength="100" placeholder="Липецк" required v-model="resume.city">
         </div>
       </div>
       <div class="form-group row">
@@ -23,19 +23,19 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">ФИО:</label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" placeholder="Петров Пётр Петрович" required v-model="resume.name">
+          <input type="text" class="form-control" maxlength="150" placeholder="Петров Пётр Петрович" required v-model="resume.name">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Номер телефона:</label>
         <div class="col-lg-8">
-          <input class="form-control" placeholder="+70123456789" required v-model="resume.phone">
+          <input class="form-control" maxlength="10" placeholder="9876543210" required v-model="resume.phone">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Email:</label>
         <div class="col-lg-8">
-          <input type="email" aria-describedby="emailHelp" class="form-control"
+          <input type="email" aria-describedby="emailHelp" class="form-control" maxlength="255"
                  placeholder="mail@example.ru" required v-model="resume.email">
         </div>
       </div>
@@ -58,23 +58,23 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Желаемая зарплата:</label>
         <div class="col-lg-8">
-          <input type="number" class="form-control" placeholder="50000" required v-model="resume.desiredSalary">
+          <input type="number" class="form-control" maxlength="10" placeholder="50000" required v-model="resume.desiredSalary">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Навыки:</label>
         <div class="col-lg-8">
-          <textarea class="form-control form-text-area" rows="3" required v-model="resume.skills"></textarea>
+          <textarea class="form-control form-text-area" maxlength="500" rows="3" required v-model="resume.skills"></textarea>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">О себе:</label>
         <div class="col-lg-8">
-          <textarea class="form-control form-text-area" v-model="resume.about" rows="3"></textarea>
+          <textarea class="form-control form-text-area" maxlength="500" v-model="resume.about" rows="3"></textarea>
         </div>
       </div>
       <button type="reset" class="btn btn-danger">Очистить форму</button>
-      <button type="button" class="btn btn-primary apply-btn-style" @click="applyResume">Применить</button>
+      <button type="submit" class="btn btn-primary apply-btn-style">Применить</button>
     </form>
   </div>
 </template>
@@ -120,7 +120,7 @@ export default {
         this.showResumeForm = true
       })
     },
-    applyResume() {
+    applyResumeForm() {
 
     }
   }
@@ -134,6 +134,7 @@ export default {
 
 .form-text-area {
   min-height: 38px;
+  max-height: 350px;
 }
 
 .apply-btn-style {
