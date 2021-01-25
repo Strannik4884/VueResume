@@ -5,7 +5,8 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Профессия:</label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" maxlength="100" placeholder="Программист" required v-model="resume.profession">
+          <input type="text" class="form-control" maxlength="100" placeholder="Программист" required
+                 v-model="resume.profession">
         </div>
       </div>
       <div class="form-group row">
@@ -17,19 +18,21 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Фото (URL):</label>
         <div class="col-lg-8">
-          <input class="form-control" placeholder="" v-model="resume.photoUrl">
+          <input type="text" class="form-control" v-model="resume.photoUrl">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">ФИО:</label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" maxlength="150" placeholder="Петров Пётр Петрович" required v-model="resume.name">
+          <input type="text" class="form-control" maxlength="150" placeholder="Петров Пётр Петрович" required
+                 v-model="resume.name">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Номер телефона:</label>
         <div class="col-lg-8">
-          <input class="form-control" maxlength="10" placeholder="9876543210" required v-model="resume.phone">
+          <input type="text" class="form-control" maxlength="10" placeholder="9876543210" required
+                 v-model="resume.phone">
         </div>
       </div>
       <div class="form-group row">
@@ -58,13 +61,15 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Желаемая зарплата:</label>
         <div class="col-lg-8">
-          <input type="number" class="form-control" maxlength="10" placeholder="50000" required v-model="resume.desiredSalary">
+          <input type="number" class="form-control" maxlength="10" placeholder="50000" required
+                 v-model="resume.desiredSalary">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Навыки:</label>
         <div class="col-lg-8">
-          <textarea class="form-control form-text-area" maxlength="500" rows="3" required v-model="resume.skills"></textarea>
+          <textarea class="form-control form-text-area" maxlength="500" rows="3" required
+                    v-model="resume.skills"></textarea>
         </div>
       </div>
       <div class="form-group row">
@@ -90,7 +95,8 @@ export default {
     return {
       // получаем текущую дату в формате dd.mm.yyyy
       birthdayPlaceholder: new Date(Date.now()).toLocaleString().slice(0, 10),
-      showResumeForm: true
+      showResumeForm: true,
+      resumeFormErrors: []
     }
   },
   components: {
@@ -121,7 +127,26 @@ export default {
       })
     },
     applyResumeForm() {
-
+      this.resumeFormErrors = [];
+      let phoneRegexp = new RegExp('\\d{' + this.resume.phone.length + '}', 'gim');
+      let desiredSalaryRegexp = new RegExp('\\d{' + this.resume.desiredSalary.length + '}', 'gim');
+      // валидация номера телефона
+      if (this.resume.phone.length < 6 || this.resume.phone.length > 10 || !phoneRegexp.test(this.resume.phone)) {
+        this.resumeFormErrors.push('Номер телефона должен состоять из цифр и быть в длину от 6 до 10 символов');
+      }
+      if (this.resume.educationLevel !== this.educationLevels[0]) {
+        // валидация даты окончания
+        let endYearRegexp = new RegExp('\\d{' + this.resume.educationEndDate.length + '}', 'gim');
+        if (this.resume.educationEndDate === '' || (parseInt(this.resume.educationEndDate) < 1900) || (parseInt(this.resume.educationEndDate) < 2021) || !endYearRegexp.test(this.resume.educationEndDate)) {
+          this.resumeFormErrors.push('Укажите корректную дату окончания обучения')
+        }
+      }
+      // валидация желаемой зарплаты
+      if (!desiredSalaryRegexp.test(this.resume.desiredSalary)) {
+        this.resumeFormErrors.push('Укажите корректный размер желаемой зарплаты')
+      }
+      console.log()
+      console.log(this.resumeFormErrors)
     }
   }
 }
