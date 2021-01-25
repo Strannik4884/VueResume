@@ -23,7 +23,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <div class="text-wrap mb-2" style="width: 100%">Номер телефона:: {{ resume.phone }}</div>
+          <div class="text-wrap mb-2" style="width: 100%">Номер телефона: {{ resume.phone }}</div>
         </div>
       </div>
       <div class="row">
