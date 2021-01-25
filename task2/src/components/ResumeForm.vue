@@ -62,6 +62,7 @@
         <label class="col-sm-3 col-form-label">Образование:</label>
         <div class="col-lg-8">
           <select class="form-control" required v-model="resume.educationLevel">
+            <option disabled>Выберите один из вариантов</option>
             <option :key="level" v-for="level in educationLevels">{{ level }}</option>
           </select>
         </div>
