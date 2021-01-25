@@ -3,10 +3,10 @@
     <div class="form container" style="display: inline;">
       <div class="d-flex">
         <div class="left-col form-input col">
-          <resume-form :resume="resume"/>
+          <resume-form :resume="resume" :resume-view="resumeView" :education-levels="educationLevels"/>
         </div>
         <div class="right-col form-output col">
-          <resume-template :resume="resume"/>
+          <resume-template :resume="resume" :resume-view="resumeView" :education-levels="educationLevels"/>
         </div>
       </div>
     </div>
@@ -37,7 +37,27 @@ export default {
         desiredSalary: '',
         skills: '',
         about: ''
-      }
+      },
+      // объект ResumeView с необходимыми полями
+      resumeView: {
+        profession: '',
+        city: '',
+        photoUrl: '',
+        name: '',
+        phone: '',
+        email: '',
+        birthday: '',
+        educationLevel: '',
+        educationPlace: '',
+        educationFaculty: '',
+        educationSpecialization: '',
+        educationEndDate: '',
+        desiredSalary: '',
+        skills: '',
+        about: ''
+      },
+      // уровни образования
+      educationLevels: ['Среднее', 'Среднее специальное', 'Неоконченное высшее', 'Высшее']
     }
   },
   components: {
