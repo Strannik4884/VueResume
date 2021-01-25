@@ -86,7 +86,7 @@
 <script>
 export default {
   name: "ResumeTemplate",
-  // переданный объект резюме
+  // переданные объекты
   props: ['resume', 'resumeView', 'educationLevels'],
   data() {
     return {}

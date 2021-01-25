@@ -61,7 +61,7 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Желаемая зарплата:</label>
         <div class="col-lg-8">
-          <input type="number" class="form-control" maxlength="10" placeholder="50000" required
+          <input type="text" class="form-control" maxlength="10" placeholder="50000" required
                  v-model="resume.desiredSalary">
         </div>
       </div>
@@ -100,7 +100,7 @@ export default {
     }
   },
   components: {
-    // компонент дополнитедьных сведений об образовании
+    // компонент дополнительных сведений об образовании
     'educationSpecial': EducationSpecial,
   },
   methods: {
@@ -137,7 +137,7 @@ export default {
       if (this.resume.educationLevel !== this.educationLevels[0]) {
         // валидация даты окончания
         let endYearRegexp = new RegExp('\\d{' + this.resume.educationEndDate.length + '}', 'gim');
-        if (this.resume.educationEndDate === '' || (parseInt(this.resume.educationEndDate) < 1900) || (parseInt(this.resume.educationEndDate) < 2021) || !endYearRegexp.test(this.resume.educationEndDate)) {
+        if (this.resume.educationEndDate === '' || (parseInt(this.resume.educationEndDate) < 1945 || parseInt(this.resume.educationEndDate) > 2021) || !endYearRegexp.test(this.resume.educationEndDate)) {
           this.resumeFormErrors.push('Укажите корректную дату окончания обучения')
         }
       }
@@ -145,8 +145,6 @@ export default {
       if (!desiredSalaryRegexp.test(this.resume.desiredSalary)) {
         this.resumeFormErrors.push('Укажите корректный размер желаемой зарплаты')
       }
-      console.log()
-      console.log(this.resumeFormErrors)
     }
   }
 }
