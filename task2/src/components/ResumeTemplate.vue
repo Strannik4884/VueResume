@@ -89,9 +89,6 @@ export default {
   name: "ResumeTemplate",
   // переданные объекты
   props: ['resume', 'resumeView', 'educationLevels'],
-  data() {
-    return {}
-  },
   methods: {
     clearResumeTemplate() {
       this.resumeView.profession = ''
