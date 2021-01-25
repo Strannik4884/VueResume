@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="text-center form-col-title">Форма резюме</h2>
-    <form action="">
+    <form ref="form" @reset.prevent="clearResumeForm" v-if="showResumeForm">
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Профессия:</label>
         <div class="col-lg-8">
@@ -73,7 +73,7 @@
           <textarea class="form-control form-text-area" v-model="resume.about" rows="3"></textarea>
         </div>
       </div>
-      <button type="button" class="btn btn-danger" @click="clearResumeForm">Очистить форму</button>
+      <button type="reset" class="btn btn-danger">Очистить форму</button>
       <button type="button" class="btn btn-primary apply-btn-style" @click="applyResume">Применить</button>
     </form>
   </div>
@@ -90,7 +90,7 @@ export default {
     return {
       // получаем текущую дату в формате dd.mm.yyyy
       birthdayPlaceholder: new Date(Date.now()).toLocaleString().slice(0, 10),
-
+      showResumeForm: true
     }
   },
   components: {
@@ -107,10 +107,18 @@ export default {
       this.resume.phone = ''
       this.resume.email = ''
       this.resume.birthday = ''
-      this.resume.education = ''
+      this.resume.educationLevel = ''
+      this.resume.educationPlace = ''
+      this.resume.educationFaculty = ''
+      this.resume.educationSpecialization = ''
+      this.resume.educationEndDate = ''
       this.resume.desiredSalary = ''
       this.resume.skills = ''
       this.resume.about = ''
+      this.showResumeForm = false
+      this.$nextTick(() => {
+        this.showResumeForm = true
+      })
     },
     applyResume() {
 
