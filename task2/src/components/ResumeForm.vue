@@ -2,6 +2,16 @@
   <div>
     <h2 class="text-center form-col-title">Форма резюме</h2>
     <form ref="form" @submit.prevent="applyResumeForm" @reset.prevent="clearResumeForm" v-if="showResumeForm">
+      <div v-if="this.resumeFormErrors.length !== 0">
+        <div class="form-group row" :key="error" v-for="error in this.resumeFormErrors">
+          <label class="col-sm-3 col-form-label"></label>
+          <div class="col-lg-8">
+            <div class="input-control bg-danger text-white pb-2 pt-2">
+              <div class="pl-2">{{ error }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Профессия:</label>
         <div class="col-lg-8">
@@ -106,6 +116,7 @@ export default {
   methods: {
     // метод очистки полей формы резюме
     clearResumeForm() {
+      this.resumeFormErrors = []
       this.resume.profession = ''
       this.resume.city = ''
       this.resume.photoUrl = ''
@@ -145,6 +156,27 @@ export default {
       if (!desiredSalaryRegexp.test(this.resume.desiredSalary)) {
         this.resumeFormErrors.push('Укажите корректный размер желаемой зарплаты')
       }
+      // если ошибок нет - отрисовываем полученное резюме
+      if(this.resumeFormErrors.length === 0) {
+        this.renderResumeTemplate()
+      }
+    },
+    renderResumeTemplate() {
+      this.resumeView.profession = this.resume.profession
+      this.resumeView.city = this.resume.city
+      this.resumeView.photoUrl = this.resume.photoUrl
+      this.resumeView.name = this.resume.name
+      this.resumeView.phone = this.resume.phone
+      this.resumeView.email = this.resume.email
+      this.resumeView.birthday = new Date(this.resume.birthday).toLocaleDateString()
+      this.resumeView.educationLevel = this.resume.educationLevel
+      this.resumeView.educationPlace = this.resume.educationPlace
+      this.resumeView.educationFaculty = this.resume.educationFaculty
+      this.resumeView.educationSpecialization = this.resume.educationSpecialization
+      this.resumeView.educationEndDate = this.resume.educationEndDate
+      this.resumeView.desiredSalary = this.resume.desiredSalary
+      this.resumeView.skills = this.resume.skills
+      this.resumeView.about = this.resume.about
     }
   }
 }
