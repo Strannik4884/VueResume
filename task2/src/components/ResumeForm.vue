@@ -149,7 +149,7 @@ export default {
       if (this.resume.educationLevel !== this.educationLevels[0]) {
         // валидация даты окончания
         let endYearRegexp = new RegExp('\\d{' + this.resume.educationEndDate.length + '}', 'gim');
-        if (this.resume.educationEndDate === '' || (parseInt(this.resume.educationEndDate) < 1945 || parseInt(this.resume.educationEndDate) > 2021) || !endYearRegexp.test(this.resume.educationEndDate)) {
+        if (this.resume.educationEndDate === '' || (parseInt(this.resume.educationEndDate) < 1945 || parseInt(this.resume.educationEndDate) > 2030) || !endYearRegexp.test(this.resume.educationEndDate)) {
           this.resumeFormErrors.push('Укажите корректную дату окончания обучения')
         }
       }
