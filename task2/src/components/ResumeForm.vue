@@ -42,16 +42,18 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Дата рождения:</label>
         <div class="col-lg-8">
-          <input class="form-control" :placeholder="birthdayPlaceholder" v-model="resume.birthday">
+          <input type="date" class="form-control" :placeholder="birthdayPlaceholder" v-model="resume.birthday">
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Образование:</label>
         <div class="col-lg-8">
-          <input type="text" class="form-control"
-                 placeholder="Липецкий Государственный Технический Университет" v-model="resume.education">
+          <select class="form-control" v-model="resume.educationLevel">
+            <option :key="level" v-for="level in educationLevels">{{ level }}</option>
+          </select>
         </div>
       </div>
+      <education-special v-if="resume.educationLevel !== educationLevels[0] && resume.educationLevel !== ''" :resume="resume" />
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Желаемая зарплата:</label>
         <div class="col-lg-8">
@@ -71,11 +73,14 @@
         </div>
       </div>
       <button type="button" class="btn btn-danger" @click="clearResumeForm">Очистить форму</button>
+      <button type="button" class="btn btn-primary apply-btn-style" @click="applyResume">Применить</button>
     </form>
   </div>
 </template>
 
 <script>
+import EducationSpecial from './EducationSpecial.vue'
+
 export default {
   name: "ResumeForm",
   // переданный объект резюме
@@ -83,8 +88,13 @@ export default {
   data () {
     return {
       // получаем текущую дату в формате dd.mm.yyyy
-      birthdayPlaceholder: new Date(Date.now()).toLocaleString().slice(0, 10)
+      birthdayPlaceholder: new Date(Date.now()).toLocaleString().slice(0, 10),
+      educationLevels: ['Среднее', 'Среднее специальное', 'Неоконченное высшее', 'Высшее']
     }
+  },
+  components: {
+    // компонент дополнитедьных сведений об образовании
+    'educationSpecial': EducationSpecial,
   },
   methods: {
     // метод очистки полей формы резюме
@@ -100,6 +110,9 @@ export default {
       this.resume.desiredSalary = ''
       this.resume.skills = ''
       this.resume.about = ''
+    },
+    applyResume(){
+
     }
   }
 }
@@ -109,7 +122,12 @@ export default {
 .form-col-title {
   padding-bottom: 20px;
 }
+
 .form-text-area {
   min-height: 38px;
+}
+
+.apply-btn-style {
+  margin-left: 10px;
 }
 </style>

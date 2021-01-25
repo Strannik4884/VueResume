@@ -29,7 +29,11 @@ export default {
         phone: '',
         email: '',
         birthday: '',
-        education: '',
+        educationLevel: '',
+        educationPlace: '',
+        educationFaculty: '',
+        educationSpecialization: '',
+        educationEndDate: '',
         desiredSalary: '',
         skills: '',
         about: ''

@@ -76,6 +76,7 @@ export default {
 .form-col-title {
   padding-bottom: 20px;
 }
+
 .resume-image {
   max-width: 250px;
   max-height: 250px;
