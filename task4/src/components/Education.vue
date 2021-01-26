@@ -1,0 +1,71 @@
+<template>
+  <div>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Образование:</label>
+      <div class="col-lg-8">
+        <select class="form-control" required v-model="education.educationLevel">
+          <option disabled>Выберите один из вариантов</option>
+          <option :key="level" v-for="level in educationLevels">{{ level }}</option>
+        </select>
+      </div>
+    </div>
+    <div v-if="education.educationLevel !== educationLevels[0] && education.educationLevel !== ''">
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Учебное заведение:</label>
+        <div class="col-lg-8">
+          <input type="text" class="form-control" maxlength="100"
+                 placeholder="Липецкий Государственный Технический Университет" required
+                 v-model="education.educationPlace">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Факультет:</label>
+        <div class="col-lg-8">
+          <input type="text" class="form-control" maxlength="100" placeholder="Автоматизации и информатики" required
+                 v-model="education.educationFaculty">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Специализация:</label>
+        <div class="col-lg-8">
+          <input type="text" class="form-control" maxlength="100"
+                 placeholder="Математическое обеспечение и администрирование информационных систем" required
+                 v-model="education.educationSpecialization">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Год окончания:</label>
+        <div class="col-lg-8">
+          <input type="text" class="form-control" maxlength="4" placeholder="2021" required
+                 v-model="education.educationEndDate">
+        </div>
+      </div>
+    </div>
+    <button v-if="index !== 0" type="button" class="btn btn-danger remove-education-button" @click="removeEducation">Удалить образование</button>
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label"></label>
+      <div class="col-lg-8">
+        <hr/>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Education",
+  props: ['education', 'index', 'educationLevels'],
+  methods: {
+    removeEducation() {
+      this.$emit('removeEducation', this.education)
+    }
+  }
+}
+</script>
+
+<style scoped>
+.remove-education-button {
+  margin-bottom: 20px;
+  width: 207px;
+}
+</style>
