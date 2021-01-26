@@ -63,7 +63,7 @@
         </div>
       </div>
       <education v-for="(education, index) in resume.educations" :key="index" @removeEducation="removeEducation"
-                 :education="education" :index="index" :education-levels="educationLevels"/>
+                 :city="resume.city" :education="education" :index="index" :education-levels="educationLevels"/>
       <button type="button" class="btn btn-primary add-education-button" @click="addEducation">Добавить образование
       </button>
       <div class="form-group row">

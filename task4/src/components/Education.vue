@@ -59,7 +59,7 @@ import jsonp from "jsonp";
 
 export default {
   name: "Education",
-  props: ['education', 'index', 'educationLevels'],
+  props: ['city', 'education', 'index', 'educationLevels'],
   data() {
     return {
       places: []
@@ -67,13 +67,21 @@ export default {
   },
   methods: {
     universiteInputHandler() {
-      jsonp('https://api.vk.com/method/database.getUniversities?city_id=78&country_id=1&count=10&v=5.126&access_token=' + process.env.VUE_APP_VK_API_KEY + '&q=' + this.education.educationPlace + '', null, (err, data) => {
+      jsonp('https://api.vk.com/method/database.getCities?country_id=1&need_all=1&count=10&v=5.126&access_token=' + process.env.VUE_APP_VK_API_KEY + '&lang=ru&q=' + this.city + '', null, (err, data) => {
         if (err) {
           console.error(err.message);
         } else {
-          this.places = data.response.items;
+          let currentCityId = data.response.items[0].id;
+          jsonp('https://api.vk.com/method/database.getUniversities?city_id=' + currentCityId + '&country_id=1&count=10&v=5.126&access_token=' + process.env.VUE_APP_VK_API_KEY + '&q=' + this.education.educationPlace + '', null, (err, data) => {
+            if (err) {
+              console.error(err.message);
+            } else {
+              this.places = data.response.items;
+            }
+          });
         }
       });
+
     },
     removeEducation() {
       this.$emit('removeEducation', this.education)
