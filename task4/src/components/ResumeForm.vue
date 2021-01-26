@@ -22,7 +22,11 @@
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Город:</label>
         <div class="col-lg-8">
-          <input type="text" class="form-control" maxlength="100" placeholder="Липецк" required v-model="resume.city">
+          <input type="text" class="form-control" maxlength="100" placeholder="Липецк" required
+                 @input="cityInputHandler" list="vkCities" v-model="resume.city">
+          <datalist id="vkCities">
+            <option v-for="city in cities" :key="city.id">{{ city.title }}</option>
+          </datalist>
         </div>
       </div>
       <div class="form-group row">
@@ -60,7 +64,8 @@
       </div>
       <education v-for="(education, index) in resume.educations" :key="index" @removeEducation="removeEducation"
                  :education="education" :index="index" :education-levels="educationLevels"/>
-      <button type="button" class="btn btn-primary add-education-button" @click="addEducation">Добавить образование</button>
+      <button type="button" class="btn btn-primary add-education-button" @click="addEducation">Добавить образование
+      </button>
       <div class="form-group row">
         <label class="col-sm-3 col-form-label">Желаемая зарплата:</label>
         <div class="col-lg-8">
@@ -99,12 +104,16 @@
 <script>
 import Education from './Education.vue'
 
+const jsonp = require('jsonp');
+
 export default {
   name: "ResumeForm",
   // переданный объект резюме
   props: ['resume', 'resumeView', 'educationLevels', 'resumeStatuses'],
   data() {
     return {
+      // список городов
+      cities: [],
       // получаем текущую дату в формате dd.mm.yyyy
       birthdayPlaceholder: new Date(Date.now()).toLocaleString().slice(0, 10),
       showResumeForm: true,
@@ -116,6 +125,16 @@ export default {
     'education': Education,
   },
   methods: {
+    // загрузка городов от VK API
+    cityInputHandler() {
+      jsonp('https://api.vk.com/method/database.getCities?country_id=1&need_all=1&count=10&v=5.126&access_token=d8a02bc4d8a02bc4d8a02bc474d8d60b14dd8a0d8a02bc4b8b051d31123e891068fad68&lang=ru&q=' + this.resume.city + '', null, (err, data) => {
+        if (err) {
+          console.error(err.message);
+        } else {
+          this.cities = data.response.items;
+        }
+      });
+    },
     // метод добавления образования
     addEducation() {
       this.resume.educations.push({
@@ -213,7 +232,7 @@ export default {
       this.resumeView.email = this.resume.email
       this.resumeView.birthday = new Date(this.resume.birthday).toLocaleDateString()
       this.resumeView.educations = []
-      for(let i = 0; i < this.resume.educations.length; ++i) {
+      for (let i = 0; i < this.resume.educations.length; ++i) {
         this.resumeView.educations.push(
             {
               educationLevel: this.resume.educations[i].educationLevel,
