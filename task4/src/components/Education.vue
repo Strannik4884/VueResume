@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     universiteInputHandler() {
-      jsonp('https://api.vk.com/method/database.getUniversities?city_id=78&country_id=1&count=10&v=5.126&access_token=d8a02bc4d8a02bc4d8a02bc474d8d60b14dd8a0d8a02bc4b8b051d31123e891068fad68&q=' + this.education.educationPlace + '', null, (err, data) => {
+      jsonp('https://api.vk.com/method/database.getUniversities?city_id=78&country_id=1&count=10&v=5.126&access_token=' + process.env.VUE_APP_VK_API_KEY + '&q=' + this.education.educationPlace + '', null, (err, data) => {
         if (err) {
           console.error(err.message);
         } else {

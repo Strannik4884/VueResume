@@ -127,7 +127,7 @@ export default {
   methods: {
     // загрузка городов от VK API
     cityInputHandler() {
-      jsonp('https://api.vk.com/method/database.getCities?country_id=1&need_all=1&count=10&v=5.126&access_token=d8a02bc4d8a02bc4d8a02bc474d8d60b14dd8a0d8a02bc4b8b051d31123e891068fad68&lang=ru&q=' + this.resume.city + '', null, (err, data) => {
+      jsonp('https://api.vk.com/method/database.getCities?country_id=1&need_all=1&count=10&v=5.126&access_token=' + process.env.VUE_APP_VK_API_KEY + '&lang=ru&q=' + this.resume.city + '', null, (err, data) => {
         if (err) {
           console.error(err.message);
         } else {
