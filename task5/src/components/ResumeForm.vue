@@ -103,6 +103,8 @@
 
 <script>
 import Education from './Education.vue'
+import axios from "axios";
+import router from "@/router";
 
 const jsonp = require('jsonp');
 
@@ -123,6 +125,84 @@ export default {
   components: {
     // компонент дополнительных сведений об образовании
     'education': Education,
+  },
+  // функция, вызываемая при создании компонента
+  created: function () {
+    // если это страница редактирования с переданным id
+    if (this.$route.params.id !== undefined) {
+      let loc = this
+      // пытаемся получить резюме по его id
+      axios.get('http://vue-resume.local:8080/api/cv/' + this.$route.params.id)
+          // если ошибка при получении
+          .catch(function (error) {
+                if (error.response) {
+                  let errorText = ''
+                  if (error.response.status === 400) {
+                    errorText = 'Некорректный id резюме'
+                  } else if (error.response.status === 404) {
+                    errorText = 'Данное резюме не найдено'
+                  }
+                  loc.$notify({
+                    group: 'message',
+                    type: 'error',
+                    title: 'Произошла ошибка!',
+                    text: errorText
+                  })
+                  router.push({path: '/'})
+                }
+              }
+          )
+          // если резюме получено
+          .then((response) => {
+            if (response.status === 200) {
+              // то выводим данные в форму
+              this.resume.profession = response.data['profession']
+              this.resume.city = response.data['city']
+              this.resume.photoUrl = response.data['photoUrl']
+              this.resumeView.photoUrl = response.data['photoUrl']
+              this.resume.name = response.data['name']
+              this.resume.phone = response.data['phone']
+              this.resume.email = response.data['email']
+              // конвертируем день рождения
+              this.resume.birthday = response.data['birthday'].replace( /(\d{2}).(\d{2}).(\d{4})/, "$3-$2-$1")
+              // добавляем образования
+              this.resume.educations = []
+              this.resumeView.educations = []
+              for (let i = 0; i < response.data['educations'].length; ++i) {
+                if (response.data['educations'][i]['educationLevel'] !== this.educationLevels[0]) {
+                  this.resume.educations.push({
+                    educationLevel: response.data['educations'][i]['educationLevel'],
+                    educationPlace: response.data['educations'][i]['educationPlace'],
+                    educationFaculty: response.data['educations'][i]['educationFaculty'],
+                    educationSpecialization: response.data['educations'][i]['educationSpecialization'],
+                    educationEndDate: response.data['educations'][i]['educationEndDate']
+                  })
+                  // если образование Среднее
+                } else {
+                  this.resume.educations.push({
+                    educationLevel: response.data['educations'][i]['educationLevel'],
+                    educationPlace: '',
+                    educationFaculty: '',
+                    educationSpecialization: '',
+                    educationEndDate: ''
+                  })
+                }
+                // обновляем в шаблоне список образований
+                this.resumeView.educations.push({
+                  educationLevel: '',
+                  educationPlace: '',
+                  educationFaculty: '',
+                  educationSpecialization: '',
+                  educationEndDate: ''
+                })
+              }
+              this.resume.desiredSalary = response.data['desiredSalary']
+              this.resume.skills = response.data['skills']
+              this.resume.about = response.data['about']
+              this.resume.resumeStatus = response.data['resumeStatus']
+            }
+          })
+    }
   },
   methods: {
     // загрузка городов от VK API
@@ -246,6 +326,47 @@ export default {
       this.resumeView.skills = this.resume.skills
       this.resumeView.about = this.resume.about
       this.resumeView.resumeStatus = this.resume.resumeStatus
+      // если это форма редактирования, то обновляем резюме по его id
+      if(this.$route.params.id !== undefined){
+        axios.post("http://vue-resume.local:8080/api/cv/" + this.$route.params.id + "/edit", this.resumeView)
+            .then((response) => {
+              if (response.status === 200) {
+                this.$notify({
+                  group: 'message',
+                  type: 'info',
+                  title: 'Резюме успешно обновлено!'
+                })
+              } else {
+                this.$notify({
+                  group: 'message',
+                  type: 'error',
+                  title: 'Произошла ошибка!',
+                  text: response.request
+                })
+              }
+            })
+      }
+      // иначе создаём новое
+      else{
+        axios.post("http://vue-resume.local:8080/api/cv/add", this.resumeView)
+            .then((response) => {
+              if (response.status === 201) {
+                this.$notify({
+                  group: 'message',
+                  type: 'info',
+                  title: 'Резюме успешно создано!'
+                })
+                router.push({path: '/'})
+              } else {
+                this.$notify({
+                  group: 'message',
+                  type: 'error',
+                  title: 'Произошла ошибка!',
+                  text: response.request
+                })
+              }
+            })
+      }
     }
   }
 }

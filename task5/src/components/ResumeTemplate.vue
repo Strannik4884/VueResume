@@ -5,7 +5,7 @@
       <div class="d-flex justify-content-center">
         <!-- Если фотография не загружается, то отображаем стандартную фотографию для резюме -->
         <img :src="resumeView.photoUrl" class="resume-image rounded-circle mb-2" alt="Image not found"
-             onerror="this.src='person.jpg';">
+             onerror="this.src='/person.jpg';">
       </div>
       <div class="row">
         <div class="col">

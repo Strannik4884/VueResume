@@ -1,11 +1,24 @@
 <template>
   <div id="app">
-    <notifications position="top center" group="message" />
-    <router-view></router-view>
+    <div class=" mt-2 mb-2 text-center">
+      <router-link class="btn btn-primary" to="/">На главную страницу</router-link>
+    </div>
+    <div class="form container" style="display: inline;">
+      <div class="d-flex">
+        <div class="left-col form-input col">
+          <resume-form :resume="resume" :resume-view="resumeView" :education-levels="educationLevels" :resume-statuses="resumeStatuses"/>
+        </div>
+        <div class="right-col form-output col">
+          <resume-template :resume="resume" :resume-view="resumeView" :education-levels="educationLevels"/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import ResumeForm from './ResumeForm.vue'
+import ResumeTemplate from './ResumeTemplate.vue'
 
 export default {
   data() {
@@ -60,6 +73,12 @@ export default {
       educationLevels: ['Среднее', 'Среднее специальное', 'Неоконченное высшее', 'Высшее'],
       resumeStatuses: ['Новый', 'Назначено собеседование', 'Принят', 'Отказ']
     }
+  },
+  components: {
+    // компонент формы резюме
+    'resumeForm': ResumeForm,
+    // компонент шаблона резюме
+    'resumeTemplate': ResumeTemplate
   }
 }
 </script>
