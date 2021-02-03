@@ -132,7 +132,7 @@ export default {
     if (this.$route.params.id !== undefined) {
       let loc = this
       // пытаемся получить резюме по его id
-      axios.get('http://vue-resume.local:8080/api/cv/' + this.$route.params.id)
+      axios.get(process.env.VUE_APP_API_DOMAIN + '/api/cv/' + this.$route.params.id)
           // если ошибка при получении
           .catch(function (error) {
                 if (error.response) {
@@ -328,7 +328,7 @@ export default {
       this.resumeView.resumeStatus = this.resume.resumeStatus
       // если это форма редактирования, то обновляем резюме по его id
       if(this.$route.params.id !== undefined){
-        axios.post("http://vue-resume.local:8080/api/cv/" + this.$route.params.id + "/edit", this.resumeView)
+        axios.post(process.env.VUE_APP_API_DOMAIN + "/api/cv/" + this.$route.params.id + "/edit", this.resumeView)
             .then((response) => {
               if (response.status === 200) {
                 this.$notify({
@@ -348,7 +348,7 @@ export default {
       }
       // иначе создаём новое
       else{
-        axios.post("http://vue-resume.local:8080/api/cv/add", this.resumeView)
+        axios.post(process.env.VUE_APP_API_DOMAIN + "/api/cv/add", this.resumeView)
             .then((response) => {
               if (response.status === 201) {
                 this.$notify({
