@@ -3,13 +3,15 @@ import VueRouter from 'vue-router'
 import ResumeMain from "@/components/ResumeMain";
 import ResumeEdit from "@/components/ResumeEdit";
 import ResumeAdd from "@/components/ResumeAdd";
+import NotFoundPage from "@/components/NotFoundPage";
 
 Vue.use(VueRouter)
 
 const routes = [
-    { path: '/', component: ResumeMain },
-    { path: '/add', component: ResumeAdd },
-    { path: '/edit/:id', component: ResumeEdit }
+    {path: '/', component: ResumeMain},
+    {path: '/add', component: ResumeAdd},
+    {path: '/edit/:id', component: ResumeEdit},
+    {path: '*', component: NotFoundPage}
 ]
 
 export default new VueRouter({
