@@ -200,7 +200,7 @@ export default {
       let phoneRegexp = new RegExp('\\d{' + this.resume.phone.length + '}', 'gim');
       let desiredSalaryRegexp = new RegExp('\\d{' + this.resume.desiredSalary.length + '}', 'gim');
       // валидация номера телефона
-      if (this.resume.phone.length < 6 || this.resume.phone.length > 10 || !phoneRegexp.test(this.resume.phone)) {
+      if (this.resume.phone.length <= 6 || this.resume.phone.length >= 10 || !phoneRegexp.test(this.resume.phone)) {
         this.resumeFormErrors.push('Номер телефона должен состоять из цифр и быть в длину от 6 до 10 символов');
       }
       // проверяем во всех указанных образованиях
