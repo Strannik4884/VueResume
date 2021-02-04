@@ -5,7 +5,7 @@
     </div>
     <div class="form container" style="display: inline;">
       <div class="d-flex">
-        <div class="left-col form-input col">
+        <div class="left-col form-input col-5">
           <resume-form :resume="resume" :resume-view="resumeView" :education-levels="educationLevels"
                        :resume-statuses="resumeStatuses"/>
         </div>
