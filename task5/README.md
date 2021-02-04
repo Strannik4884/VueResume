@@ -5,9 +5,10 @@
 npm install
 ```
 
-### Укажите ключ доступа VK API в файле .env
+### Укажите переменные окружения в файле .env
 ```
 VUE_APP_VK_API_KEY=
+VUE_APP_API_DOMAIN=
 ```
 
 
