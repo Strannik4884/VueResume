@@ -164,7 +164,7 @@ export default {
               this.resume.phone = response.data['phone']
               this.resume.email = response.data['email']
               // конвертируем день рождения
-              this.resume.birthday = response.data['birthday'].replace( /(\d{2}).(\d{2}).(\d{4})/, "$3-$2-$1")
+              this.resume.birthday = response.data['birthday'].replace(/(\d{2}).(\d{2}).(\d{4})/, "$3-$2-$1")
               // добавляем образования
               this.resume.educations = []
               this.resumeView.educations = []
@@ -327,7 +327,7 @@ export default {
       this.resumeView.about = this.resume.about
       this.resumeView.resumeStatus = this.resume.resumeStatus
       // если это форма редактирования, то обновляем резюме по его id
-      if(this.$route.params.id !== undefined){
+      if (this.$route.params.id !== undefined) {
         axios.post(process.env.VUE_APP_API_DOMAIN + "/api/cv/" + this.$route.params.id + "/edit", this.resumeView)
             .then((response) => {
               if (response.status === 200) {
@@ -347,7 +347,7 @@ export default {
             })
       }
       // иначе создаём новое
-      else{
+      else {
         axios.post(process.env.VUE_APP_API_DOMAIN + "/api/cv/add", this.resumeView)
             .then((response) => {
               if (response.status === 201) {

@@ -43,7 +43,8 @@
             <div class="text-wrap mb-2" style="width: 100%">Образование: {{ education.educationLevel }}</div>
           </div>
         </div>
-        <div v-if="resume.educations[index].educationLevel !== educationLevels[0] && resume.educations[index].educationLevel !== ''">
+        <div
+            v-if="resume.educations[index].educationLevel !== educationLevels[0] && resume.educations[index].educationLevel !== ''">
           <div class="row">
             <div class="col">
               <div class="text-wrap mb-2" style="width: 100%">Учебное заведение: {{ education.educationPlace }}</div>
@@ -56,7 +57,10 @@
           </div>
           <div class="row">
             <div class="col">
-              <div class="text-wrap mb-2" style="width: 100%">Специализация: {{ education.educationSpecialization }}</div>
+              <div class="text-wrap mb-2" style="width: 100%">Специализация: {{
+                  education.educationSpecialization
+                }}
+              </div>
             </div>
           </div>
           <div class="row">
@@ -65,7 +69,7 @@
             </div>
           </div>
         </div>
-        <hr v-if="resumeView.educations.length > 1" />
+        <hr v-if="resumeView.educations.length > 1"/>
       </div>
       <div class="row">
         <div class="col">
@@ -106,7 +110,7 @@ export default {
       this.resumeView.phone = ''
       this.resumeView.email = ''
       this.resumeView.birthday = ''
-      for(let i = 0; i < this.resumeView.educations.length; ++i) {
+      for (let i = 0; i < this.resumeView.educations.length; ++i) {
         this.resumeView.educations[i].educationLevel = ''
         this.resumeView.educations[i].educationPlace = ''
         this.resumeView.educations[i].educationFaculty = ''

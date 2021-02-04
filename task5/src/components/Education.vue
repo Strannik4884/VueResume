@@ -14,7 +14,8 @@
         <label class="col-sm-3 col-form-label">Учебное заведение:</label>
         <div class="col-lg-8">
           <input type="text" class="form-control" maxlength="100"
-                 placeholder="Липецкий Государственный Технический Университет" required :list="'educationPlaces-' + index + ''"
+                 placeholder="Липецкий Государственный Технический Университет" required
+                 :list="'educationPlaces-' + index + ''"
                  @input="universiteInputHandler" v-model="education.educationPlace">
           <datalist :id="'educationPlaces-' + index + ''">
             <option v-for="place in places" :key="place.id">{{ place.title }}</option>
@@ -44,7 +45,9 @@
         </div>
       </div>
     </div>
-    <button v-if="index !== 0" type="button" class="btn btn-danger remove-education-button" @click="removeEducation">Удалить образование</button>
+    <button v-if="index !== 0" type="button" class="btn btn-danger remove-education-button" @click="removeEducation">
+      Удалить образование
+    </button>
     <div class="form-group row">
       <label class="col-sm-3 col-form-label"></label>
       <div class="col-lg-8">

@@ -6,7 +6,8 @@
     <div class="form container" style="display: inline;">
       <div class="d-flex">
         <div class="left-col form-input col">
-          <resume-form :resume="resume" :resume-view="resumeView" :education-levels="educationLevels" :resume-statuses="resumeStatuses"/>
+          <resume-form :resume="resume" :resume-view="resumeView" :education-levels="educationLevels"
+                       :resume-statuses="resumeStatuses"/>
         </div>
         <div class="right-col form-output col">
           <resume-template :resume="resume" :resume-view="resumeView" :education-levels="educationLevels"/>

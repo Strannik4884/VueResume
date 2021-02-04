@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
-.field{
+.field {
   background: #ededed;
 }
 
