@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="text-center">{{ title }}</h4>
+    <h4 class="text-center">{{ title + ' (' + resumes.length + ')' }}</h4>
     <draggable :list="resumes" group="user" @change="changeStatus">
       <div v-for="(item, index) in resumes" :key="index">
         <resume-item
