@@ -12,7 +12,7 @@
         </div>
         <div>{{ name }}</div>
         <div>{{ profession }}</div>
-        <div>Дата рождения: {{ birthday }}</div>
+        <div>Возраст: {{ age }}</div>
         <hr/>
       </div>
     </div>
@@ -22,7 +22,7 @@
 <script>
 export default {
   name: "ResumeItem",
-  props: ['name', 'profession', 'birthday', 'photoUrl'],
+  props: ['name', 'profession', 'age', 'photoUrl'],
 }
 </script>
 

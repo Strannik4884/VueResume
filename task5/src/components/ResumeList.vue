@@ -7,7 +7,7 @@
             :photoUrl="item.photoUrl"
             :name="item.name"
             :profession="item.profession"
-            :birthday="item.birthday"
+            :age="getAge(item.birthday)"
             @click.native="itemClick(item.id)">
         </resume-item>
       </div>
@@ -58,6 +58,20 @@ export default {
     },
     itemClick(resume_id) {
       this.$router.push({name: 'edit', params: {id: resume_id}});
+    },
+    getAge(dateString) {
+      let day = parseInt(dateString.substring(0, 2));
+      let month = parseInt(dateString.substring(3, 5));
+      let year = parseInt(dateString.substring(6, 10));
+
+      let today = new Date();
+      let birthDate = new Date(year, month - 1, day);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      let m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
     }
   },
 }
