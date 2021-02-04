@@ -28,6 +28,7 @@ export default {
 
 <style scoped>
 .field {
+  cursor: grab;
   background: #ededed;
 }
 
