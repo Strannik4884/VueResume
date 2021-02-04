@@ -26,6 +26,7 @@ export default {
   components: {draggable, ResumeItem},
   props: ['title', 'resumes', 'resumesNew', 'resumesAssigned', 'resumesAccepted', 'resumesFault'],
   methods: {
+    // изменяем статус текущего резюме
     changeStatus: function (e) {
       let add = e.added;
       if (typeof add !== "undefined") {
@@ -56,14 +57,15 @@ export default {
             })
       }
     },
+    // обработчик клика по резюме
     itemClick(resume_id) {
       this.$router.push({name: 'edit', params: {id: resume_id}});
     },
+    // считаем возраст персоны
     getAge(dateString) {
       let day = parseInt(dateString.substring(0, 2));
       let month = parseInt(dateString.substring(3, 5));
       let year = parseInt(dateString.substring(6, 10));
-
       let today = new Date();
       let birthDate = new Date(year, month - 1, day);
       let age = today.getFullYear() - birthDate.getFullYear();

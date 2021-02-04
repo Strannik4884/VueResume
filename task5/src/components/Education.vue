@@ -69,6 +69,7 @@ export default {
     }
   },
   methods: {
+    // получаем список университетов в городе и по вводимому ключу
     universiteInputHandler() {
       jsonp('https://api.vk.com/method/database.getCities?country_id=1&need_all=1&count=10&v=5.126&access_token=' + process.env.VUE_APP_VK_API_KEY + '&lang=ru&q=' + this.city + '', null, (err, data) => {
         if (err) {

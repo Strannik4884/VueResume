@@ -81,6 +81,7 @@ export default {
         })
   },
   methods: {
+    // фильтруем список
     filterResumes: function (resumes, status) {
       function check(value) {
         let result = false;
@@ -92,6 +93,7 @@ export default {
 
       return resumes.filter(check);
     },
+    // обновляем список
     updateList: function (list, status) {
       axios.get(process.env.VUE_APP_API_DOMAIN + "/api/cv/")
           .then((response) => {
