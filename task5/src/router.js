@@ -8,10 +8,10 @@ import NotFoundPage from "@/components/NotFoundPage";
 Vue.use(VueRouter)
 
 const routes = [
-    {path: '/', component: ResumeMain},
-    {path: '/add', component: ResumeAdd},
-    {path: '/edit/:id', component: ResumeEdit},
-    {path: '*', component: NotFoundPage}
+    {path: '/', name: 'home', component: ResumeMain},
+    {path: '/add', name: 'add', component: ResumeAdd},
+    {path: '/edit/:id', name: 'edit', component: ResumeEdit},
+    {path: '*', name: 'error', component: NotFoundPage}
 ]
 
 export default new VueRouter({
